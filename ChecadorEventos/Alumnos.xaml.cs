@@ -3,6 +3,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
@@ -97,9 +98,44 @@ namespace ChecadorEventos
             var result = await this.ShowMessageAsync("Capturar Huella", "¿Desea capturar la huella del Alumno: " + alumno + "?", MessageDialogStyle.AffirmativeAndNegative, mySettings);
             if (result.ToString() == "Affirmative")
             {
-                registrar_huella(alumno.ToString());
+                registrar_huella_php(alumno.ToString());
             }
 
+        }
+
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        private void registrar_huella_php(string alumno)
+        {
+            try
+            {
+                objMethods.ShowWindowEnrollment(objReader);
+                xml = objMethods.GetFingerprint_XML();
+                using (var client = new WebClient())
+                {
+                    var values = new NameValueCollection();
+                    values["cuenta"] = alumno;
+                    values["huella"] = Base64Encode(xml);
+                    var response = client.UploadValues("http://facite.uas.edu.mx/agenda/actualizar_huella.php", values);
+
+                    var responseString = Encoding.Default.GetString(response);
+                    MessageBox.Show(responseString);
+                }
+                //string res = PostMessageToURL(alumno, xml);
+                /*if (new datos.Da_Alumnos().InsertarHuella(alumno, xml))
+                {
+                    MessageBox.Show("Huella registrada correctamente");
+                    //ListarAlumnos();
+                }*/
+            }
+            catch (System.Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
 
         private void registrar_huella(string alumno)
@@ -112,7 +148,7 @@ namespace ChecadorEventos
                 if (new datos.Da_Alumnos().InsertarHuella(alumno, xml))
                 {
                     MessageBox.Show("Huella registrada correctamente");
-                    ListarAlumnos();
+                    //ListarAlumnos();
                 }
             }
             catch (System.Exception)
