@@ -1,0 +1,135 @@
+﻿<controls:MetroWindow x:Class="ChecadorEventos.Alumnos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChecadorEventos"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"          
+        Height="720" Width="1024" WindowStartupLocation="CenterScreen"
+        Title="Administración de Alumnos" Icon="img/icon_fing.png">
+    <controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- data template used for the dialogs example, defines a View for a ViewModel of type DateTime  -->
+        </ResourceDictionary>
+    </controls:MetroWindow.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush TileMode="Tile"  Stretch="UniformToFill" ImageSource="/ChecadorEventos;component/img/bg1.png"/>
+        </Grid.Background>
+        <!--ESTA ES LA CABECERA -->
+        <materialDesign:ColorZone Mode="PrimaryDark" Padding="16">
+            <DockPanel>
+                
+                <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Face" Height="30" Width="30" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal"
+                            materialDesign:RippleAssist.IsCentered="True">
+                    <materialDesign:ColorZone Mode="Light" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1"
+                                   Margin="16 0 0 0"
+                                   materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                            </Button>
+                            <TextBox x:Name="txt_buscar" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Buscar"  KeyUp="txt_buscar_KeyUp"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                     MinWidth="200" VerticalAlignment="Center">
+                            </TextBox>
+                            <Button Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="2"/>
+                            
+
+                        </Grid>
+
+                    </materialDesign:ColorZone>
+                    <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="5 0 0 0" Panel.ZIndex="0" Width="50" Height="40" Click="Button_Click">
+                        <materialDesign:PackIcon Kind="Check" Width="35" Height="35"/>
+                    </Button>
+                    <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="5 0 0 0" Panel.ZIndex="0" Width="50" Height="40" HorizontalAlignment="Right" Click="Button_Click_1">
+                        <materialDesign:PackIcon Kind="Plus" Width="35" Height="35"/>
+                    </Button>
+                </StackPanel>
+
+
+            </DockPanel>
+        </materialDesign:ColorZone>
+        <!--card para los registros -->
+        <materialDesign:Card VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" Margin="10 80 10 10" Opacity="0.98">
+            <Grid>
+                
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                    <ItemsControl x:Name="dg_alumnos" Grid.IsSharedSizeScope="True" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:TransitioningContent OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplierExtension 0:0:0.1}"
+                                                                 Opacity="0"
+                                                                 RunHint="Loaded">
+                                    <materialDesign:TransitioningContent.OpeningEffects>
+                                        <materialDesign:TransitionEffect Kind="SlideInFromLeft" />
+                                        <materialDesign:TransitionEffect Kind="FadeIn" />
+                                    </materialDesign:TransitioningContent.OpeningEffects>
+                                    
+                                    
+                                    <Border x:Name="Border" Cursor="Hand" Padding="10" BorderThickness="0 0 0 1" BorderBrush="{DynamicResource AccentColorBrush4}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                        </Grid.ColumnDefinitions>
+                                       
+                                            <StackPanel Margin="8 0 0 0" Grid.Column="1">
+                                                <TextBlock FontWeight="Bold" FontSize="13" >
+                                                             <materialDesign:PackIcon Kind="Face" Opacity=".56" Margin="0 0 0 5" Foreground="{DynamicResource AccentColorBrush}" /> <Label Content="{Binding Nombre}" Foreground="{DynamicResource AccentColorBrush}"></Label>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="Bold" FontSize="12" >
+                                                             <materialDesign:PackIcon Kind="UserCardDetails" Opacity=".56" Margin="0 0 0 5" Foreground="Gray" /> <Label Content="{Binding Cuenta}" Foreground="Gray"></Label>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="Bold" FontSize="12" >
+                                                             <materialDesign:PackIcon Kind="Email" Opacity=".56" Margin="0 0 0 5" Foreground="Gray" /> <Label Content="{Binding Correo}" Foreground="Gray"></Label>
+                                                </TextBlock>
+                                                <TextBlock FontWeight="Bold" FontSize="12" >
+                                                             <materialDesign:PackIcon Kind="Fingerprint" Opacity=".99" Margin="0 0 0 5" Foreground="LightPink" /> <Label Content="{Binding Huella}" Foreground="Gray"></Label>
+                                                </TextBlock>
+                                                <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 -50 0 0" Foreground="{DynamicResource AccentColorBrush}">
+                                                    <StackPanel>
+                                                        <Button BorderBrush="{x:Null}" x:Name="btn_perfil" CommandParameter="{Binding Cuenta}" Content="Capturar Huella" Click="btn_perfil_Click" />
+                                                        <Button  Background="Red"  BorderBrush="{x:Null}" x:Name="btn_eliminar" CommandParameter="{Binding Cuenta}" Content="Eliminar"/>
+                                                    </StackPanel>
+                                                </materialDesign:PopupBox>
+                                            </StackPanel>
+                                       
+
+                                    </Grid>
+
+                                </Border>
+                        
+                                </materialDesign:TransitioningContent>
+
+                            </DataTemplate>
+
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+
+
+</controls:MetroWindow>
+

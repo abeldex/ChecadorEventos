@@ -1,0 +1,54 @@
+﻿<controls:MetroWindow  x:Class="ChecadorEventos.Alumno_nuevo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChecadorEventos"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"   
+        Title="Registrar Usuario" Height="250" Width="300" WindowStartupLocation="CenterScreen" Icon="img/icon_fing.png">
+    <controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- data template used for the dialogs example, defines a View for a ViewModel of type DateTime  -->
+        </ResourceDictionary>
+    </controls:MetroWindow.Resources>
+    <Grid>
+        <materialDesign:ColorZone Mode="PrimaryDark" VerticalAlignment="Top" Height="20" >
+
+        </materialDesign:ColorZone>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26*"></RowDefinition>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="59*"/>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="1"  x:Name="txt_cuenta" Margin="5,5,5,0" materialDesign:HintAssist.Hint="Codigo" Height="35"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Visible" BorderThickness="0"
+                                     MinWidth="200" FontWeight="Bold" TextAlignment="Center" FontSize="14" />
+            <TextBox Grid.Row="2"  x:Name="txt_nombre" Margin="5,5 5 5" materialDesign:HintAssist.Hint="Nombre Completo" Height="35"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Visible" BorderThickness="0" 
+                                     MinWidth="200" FontWeight="Bold" TextAlignment="Center" FontSize="14"/>
+            <TextBox  x:Name="txt_correo" Margin="5,5,5,5" materialDesign:HintAssist.Hint="Correo Electrónico" Height="35"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Visible" BorderThickness="0"
+                                     MinWidth="200" Grid.Row="3" FontWeight="Bold" TextAlignment="Center" FontSize="14" />
+
+            <Button Margin="0,6,0,0" Grid.Row="4" Height="Auto" Click="Button_Click">
+                Guardar
+            </Button>
+        </Grid>
+    </Grid>
+</controls:MetroWindow>

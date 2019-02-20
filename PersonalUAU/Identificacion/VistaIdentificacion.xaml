@@ -1,0 +1,41 @@
+﻿<controls:MetroWindow x:Class="PersonalUAU.Identificacion.VistaIdentificacion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:src="clr-namespace:PersonalUAU.Identificacion"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Titulo" Height="502.985" Width="900" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Icon="/PersonalUAU;component/img/calendar-text-outline.png">
+    <Grid>
+        <materialDesign:ColorZone Mode="PrimaryDark" Padding="0" Height="90">
+            <DockPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="43*"/>
+                        <RowDefinition Height="47*"/>
+                    </Grid.RowDefinitions>
+
+                    <materialDesign:PackIcon Kind="Clock" Height="30" Width="30" VerticalAlignment="Center" Grid.Row="0"/>
+                    <Label x:Name="txt_evento"  FontSize="18" VerticalAlignment="Center" FontWeight="Light" Foreground="WhiteSmoke" Grid.Row="0" Margin="30, 0, 0, 0">Fechas</Label>
+                    <materialDesign:PackIcon Kind="CommentTextOutline" Height="30" Width="30" VerticalAlignment="Center" Grid.Row="1"/>
+                    <Label x:Name="txt_descripcion"  FontSize="16" VerticalAlignment="Center" FontWeight="Light" Foreground="WhiteSmoke" Margin="30, 0, 0, 0" Grid.Row="1">Descripcion</Label>
+                </Grid>
+
+            </DockPanel>
+
+        </materialDesign:ColorZone>
+        <Image x:Name="imagen" gif:ImageBehavior.AnimatedSource="/PersonalUAU;component/img/Fingerprint (1).gif" Width="253" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,90,0,0"/>
+        <Grid Margin="0">
+
+            <Grid Margin="10 80 250 10">
+                <Label x:Name="lblMensaje" Content="Coloque su dedo en el checador...." Margin="10" FontSize="36" FontWeight="Light" />
+                <Label x:Name="lblNombre" Content="" Margin="20,80,20,175" FontSize="40" FontWeight="Bold" HorizontalContentAlignment="Center" Foreground="{DynamicResource AccentColorBrush}"/>
+                <Label x:Name="lbl_fechas" Content="" Margin="10,246,10,68" FontSize="32" HorizontalContentAlignment="Center">
+                </Label>
+                <Label x:Name="lbl_resto" Content="" Margin="10,312,10,0" FontSize="12" HorizontalContentAlignment="Center"/>
+            </Grid>
+
+            <Label x:Name="lblHora" Content="00:00:00" HorizontalAlignment="Right" Margin="0,308,33,0" VerticalAlignment="Top" Height="76" Width="169" FontSize="36" FontWeight="Bold"/>
+        </Grid>
+    </Grid>
+</controls:MetroWindow>
